@@ -1,11 +1,11 @@
 /*
- * Copyright (c) the original author or authors
+ * Copyright 2002-2014 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * You may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.proliming.commons.io;
 
 import java.io.File;
@@ -23,16 +24,16 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 
+import com.google.common.base.Preconditions;
+import com.proliming.commons.utils.ResourceUtils;
+
 /**
- * Basic implementations for  {@link Resource}.
+ * Convenience base class for {@link Resource} implementations,
  * pre-implementing typical behavior.
  * <p/>
  * <p>The "exists" method will check whether a File or InputStream can
  * be opened; "isOpen" will always return false; "getURL" and "getFile"
  * throw an exception; and "toString" will return the description.
- *
- * @author Juergen Hoeller
- * @author Li Ming
  */
 public abstract class AbstractResource implements Resource {
 
@@ -45,7 +46,7 @@ public abstract class AbstractResource implements Resource {
     public boolean exists() {
         try {
             return getFile().exists();
-        } catch (IOException ex) {
+        } catch (IOException e) {
             try {
                 InputStream is = getInputStream();
                 is.close();
@@ -89,9 +90,9 @@ public abstract class AbstractResource implements Resource {
     public URI getURI() throws IOException {
         URL url = getURL();
         try {
-            return ResourceUtils.toURI(url);
+            return ResourceUtils.toURI(url.toString());
         } catch (URISyntaxException ex) {
-            throw new NestedIOException("Invalid URI [" + url + "]", ex);
+            throw new IOException("Invalid URI [" + url + "]", ex);
         }
     }
 
@@ -115,9 +116,7 @@ public abstract class AbstractResource implements Resource {
     @Override
     public long contentLength() throws IOException {
         InputStream is = this.getInputStream();
-        if (is == null) {
-            throw new IllegalStateException("resource input stream must not be null");
-        }
+        Preconditions.checkNotNull(is, "resource input stream must not be null");
         try {
             long size = 0;
             byte[] buf = new byte[255];
@@ -177,7 +176,7 @@ public abstract class AbstractResource implements Resource {
      * assuming that this resource type does not have a filename.
      */
     @Override
-    public String getFilename() {
+    public String getFileName() {
         return null;
     }
 

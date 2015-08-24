@@ -11,5 +11,13 @@
 
     <artifactId>commons-io</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.proliming</groupId>
+            <artifactId>commons-utils</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
 
 </project>

@@ -1,11 +1,11 @@
 /*
- * Copyright (c) the original author or authors
+ * Copyright 2002-2014 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * You may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.proliming.commons.io;
 
 import java.io.File;
@@ -24,14 +25,13 @@ import java.io.OutputStream;
 import java.net.URI;
 import java.net.URL;
 
+import com.google.common.base.Preconditions;
+import com.proliming.commons.utils.StringUtils;
+
 /**
  * {@link Resource} implementation for {@code java.io.File} handles.
  * Obviously supports resolution as File, and also as URL.
  * Implements the extended {@link WritableResource} interface.
- *
- * @author Juergen Hoeller
- * @author Li Ming
- * @see java.io.File
  */
 public class FileSystemResource extends AbstractResource implements WritableResource {
 
@@ -52,7 +52,7 @@ public class FileSystemResource extends AbstractResource implements WritableReso
      * @param file a File handle
      */
     public FileSystemResource(File file) {
-        Assert.notNull(file, "File must not be null");
+        Preconditions.checkNotNull(file, "File must not be null");
         this.file = file;
         this.path = StringUtils.cleanPath(file.getPath());
     }
@@ -69,7 +69,7 @@ public class FileSystemResource extends AbstractResource implements WritableReso
      * @param path a file path
      */
     public FileSystemResource(String path) {
-        Assert.notNull(path, "Path must not be null");
+        Preconditions.checkNotNull(path, "Path must not be null");
         this.file = new File(path);
         this.path = StringUtils.cleanPath(path);
     }
@@ -152,6 +152,8 @@ public class FileSystemResource extends AbstractResource implements WritableReso
     /**
      * This implementation creates a FileSystemResource, applying the given path
      * relative to the path of the underlying file of this resource descriptor.
+     *
+     * @see StringUtils#applyRelativePath(String, String)
      */
     @Override
     public Resource createRelative(String relativePath) {
@@ -165,7 +167,7 @@ public class FileSystemResource extends AbstractResource implements WritableReso
      * @see java.io.File#getName()
      */
     @Override
-    public String getFilename() {
+    public String getFileName() {
         return this.file.getName();
     }
 
@@ -222,4 +224,3 @@ public class FileSystemResource extends AbstractResource implements WritableReso
     }
 
 }
-
