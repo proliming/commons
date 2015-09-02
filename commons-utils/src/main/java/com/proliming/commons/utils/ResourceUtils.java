@@ -13,39 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-/*
- * Copyright (c) the original author or authors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * You may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *        http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.proliming.commons.utils;
 
-/*
- * Copyright 2002-2014 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -54,10 +23,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
-
-import org.apache.commons.lang.StringUtils;
-
-import com.google.common.base.Preconditions;
 
 /**
  * Utility methods for resolving resource locations to files in the
@@ -125,6 +90,13 @@ public abstract class ResourceUtils {
      */
     public static final String JAR_URL_SEPARATOR = "!/";
 
+
+    /**
+     * ResourceUtils instances should NOT be constructed in standard programming.
+     */
+    private ResourceUtils() {
+    }
+
     /**
      * Return whether the given resource location is a URL:
      * either a special "classpath" pseudo URL or a standard URL.
@@ -164,7 +136,7 @@ public abstract class ResourceUtils {
      * @throws FileNotFoundException if the resource cannot be resolved to a URL
      */
     public static URL getURL(String resourceLocation) throws FileNotFoundException {
-        Preconditions.checkNotNull(resourceLocation, "Resource location must not be null");
+        Verify.notNull(resourceLocation, "Resource location must not be null");
         if (resourceLocation.startsWith(CLASSPATH_URL_PREFIX)) {
             String path = resourceLocation.substring(CLASSPATH_URL_PREFIX.length());
             ClassLoader cl = ClassUtils.getDefaultClassLoader();
@@ -205,7 +177,7 @@ public abstract class ResourceUtils {
      *                               a file in the file system
      */
     public static File getFile(String resourceLocation) throws FileNotFoundException {
-        Preconditions.checkNotNull(resourceLocation, "Resource location must not be null");
+        Verify.notNull(resourceLocation, "Resource location must not be null");
         if (resourceLocation.startsWith(CLASSPATH_URL_PREFIX)) {
             String path = resourceLocation.substring(CLASSPATH_URL_PREFIX.length());
             String description = "class path resource [" + path + "]";
@@ -255,7 +227,7 @@ public abstract class ResourceUtils {
      *                               a file in the file system
      */
     public static File getFile(URL resourceUrl, String description) throws FileNotFoundException {
-        Preconditions.checkNotNull(resourceUrl, "Resource URL must not be null");
+        Verify.notNull(resourceUrl, "Resource URL must not be null");
         if (!URL_PROTOCOL_FILE.equals(resourceUrl.getProtocol())) {
             throw new FileNotFoundException(
                     description + " cannot be resolved to absolute file path " +
@@ -298,7 +270,7 @@ public abstract class ResourceUtils {
      *                               a file in the file system
      */
     public static File getFile(URI resourceUri, String description) throws FileNotFoundException {
-        Preconditions.checkNotNull(resourceUri, "Resource URI must not be null");
+        Verify.notNull(resourceUri, "Resource URI must not be null");
         if (!URL_PROTOCOL_FILE.equals(resourceUri.getScheme())) {
             throw new FileNotFoundException(
                     description + " cannot be resolved to absolute file path " +

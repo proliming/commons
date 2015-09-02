@@ -30,12 +30,12 @@ import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.TimeZone;
 
-import org.apache.commons.lang.ObjectUtils;
+import org.apache.commons.lang3.ObjectUtils;
 
 /**
  * Miscellaneous {@link String} utility methods.
  */
-public class StringUtils extends org.apache.commons.lang.StringUtils {
+public class StringUtils extends org.apache.commons.lang3.StringUtils {
 
     private static final String FOLDER_SEPARATOR = "/";
 

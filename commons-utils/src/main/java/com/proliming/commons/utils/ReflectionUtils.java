@@ -30,15 +30,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.google.common.base.Preconditions;
-
 /**
  * Simple utility class for working with the reflection API and handling
  * reflection exceptions.
  * <p/>
  * <p>Only intended for internal use.
  */
-public abstract class ReflectionUtils {
+public class ReflectionUtils {
+
+
+    /**
+     * ReflectionUtils instances should NOT be constructed in standard programming.
+     */
+    private ReflectionUtils() {
+    }
 
     /**
      * Cache for {@link Class#getDeclaredMethods()} plus equivalent default methods
@@ -78,8 +83,8 @@ public abstract class ReflectionUtils {
      * @return the corresponding Field object, or {@code null} if not found
      */
     public static Field findField(Class<?> cls, String name, Class<?> type) {
-        Preconditions.checkNotNull(cls, "Class must not be null");
-        Preconditions.checkArgument(name != null || type != null, "Either name or type of the field must be specified");
+        Verify.notNull(cls, "Class must not be null");
+        Verify.verify(name != null || type != null, "Either name or type of the field must be specified");
         Class<?> searchType = cls;
         while (Object.class != searchType && searchType != null) {
             Field[] fields = getDeclaredFields(searchType);
@@ -164,8 +169,8 @@ public abstract class ReflectionUtils {
      * @return the Method object, or {@code null} if none found
      */
     public static Method findMethod(Class<?> cls, String name, Class<?>... paramTypes) {
-        Preconditions.checkNotNull(cls, "Class must not be null");
-        Preconditions.checkNotNull(name, "Method name must not be null");
+        Verify.notNull(cls, "Class must not be null");
+        Verify.notNull(name, "Method name must not be null");
         Class<?> searchType = cls;
         while (searchType != null) {
             Method[] methods = (searchType.isInterface() ? searchType.getMethods() : getDeclaredMethods(searchType));
@@ -355,7 +360,7 @@ public abstract class ReflectionUtils {
      * {@code false} if it needs to be wrapped
      */
     public static boolean declaresException(Method method, Class<?> exceptionType) {
-        Preconditions.checkNotNull(method, "Method must not be null");
+        Verify.notNull(method, "Method must not be null");
         Class<?>[] declaredExceptions = method.getExceptionTypes();
         for (Class<?> declaredException : declaredExceptions) {
             if (declaredException.isAssignableFrom(exceptionType)) {
