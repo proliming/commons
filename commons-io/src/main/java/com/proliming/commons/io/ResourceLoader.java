@@ -22,8 +22,7 @@ import com.proliming.commons.utils.ResourceUtils;
 /**
  * Strategy interface for loading resources (e.. class path or file system
  * resources).
- * <p>{@link DefaultResourceLoader} is a standalone implementation that is
- * usable outside an ApplicationContext, also used by {@link ResourceEditor}.
+ * <p>{@link DefaultResourceLoader} is a standalone implementation.
  */
 public interface ResourceLoader {
 
