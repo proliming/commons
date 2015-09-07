@@ -19,13 +19,12 @@ package com.proliming.commons.io;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import com.google.common.base.Preconditions;
 import com.proliming.commons.utils.ClassUtils;
 import com.proliming.commons.utils.StringUtils;
+import com.proliming.commons.utils.Verify;
 
 /**
  * Default implementation of the {@link ResourceLoader} interface.
- * Used by {@link ResourceEditor}.
  * Can also be used standalone.
  * <p/>
  * <p>Will return a {@link UrlResource} if the location value is a URL,
@@ -83,7 +82,7 @@ public class DefaultResourceLoader implements ResourceLoader {
 
     @Override
     public Resource getResource(String location) {
-        Preconditions.checkNotNull(location, "Location must not be null");
+        Verify.notNull(location, "Location must not be null");
         if (location.startsWith("/")) {
             return getResourceByPath(location);
         } else if (location.startsWith(CLASSPATH_URL_PREFIX)) {

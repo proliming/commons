@@ -25,10 +25,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
-
-import com.google.common.base.Preconditions;
 import com.proliming.commons.utils.ResourceUtils;
 import com.proliming.commons.utils.StringUtils;
+import com.proliming.commons.utils.Verify;
 
 /**
  * {@link Resource} implementation for {@code java.net.URL} locators.
@@ -62,7 +61,7 @@ public class UrlResource extends AbstractFileResolvingResource {
      * @throws MalformedURLException if the given URL path is not valid
      */
     public UrlResource(URI uri) throws MalformedURLException {
-        Preconditions.checkNotNull(uri, "URI must not be null");
+        Verify.notNull(uri, "URI must not be null");
         this.uri = uri;
         this.url = uri.toURL();
         this.cleanedUrl = getCleanedUrl(this.url, uri.toString());
@@ -74,7 +73,7 @@ public class UrlResource extends AbstractFileResolvingResource {
      * @param url a URL
      */
     public UrlResource(URL url) {
-        Preconditions.checkNotNull(url, "URL must not be null");
+        Verify.notNull(url, "URL must not be null");
         this.url = url;
         this.cleanedUrl = getCleanedUrl(this.url, url.toString());
         this.uri = null;
@@ -90,7 +89,7 @@ public class UrlResource extends AbstractFileResolvingResource {
      * @see java.net.URL#URL(String)
      */
     public UrlResource(String path) throws MalformedURLException {
-        Preconditions.checkNotNull(path, "Path must not be null");
+        Verify.notNull(path, "Path must not be null");
         this.uri = null;
         this.url = new URL(path);
         this.cleanedUrl = getCleanedUrl(this.url, path);

@@ -25,7 +25,6 @@ import com.proliming.commons.utils.StringUtils;
  *
  * @see Class#getResource(String)
  * @see ClassPathResource#ClassPathResource(String, Class)
- * @since 3.0
  */
 public class ClassRelativeResourceLoader extends DefaultResourceLoader {
 

@@ -22,9 +22,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.Charset;
 
-import org.apache.commons.lang.ObjectUtils;
-
-import com.google.common.base.Preconditions;
+import com.proliming.commons.utils.Verify;
 
 /**
  * Holder that combines a {@link Resource} descriptor with a specific encoding
@@ -35,7 +33,6 @@ import com.google.common.base.Preconditions;
  *
  * @see java.io.Reader
  * @see java.nio.charset.Charset
- * @since 1.2.6
  */
 public class EncodedResource implements InputStreamSource {
 
@@ -79,7 +76,7 @@ public class EncodedResource implements InputStreamSource {
 
     private EncodedResource(Resource resource, String encoding, Charset charset) {
         super();
-        Preconditions.checkNotNull(resource, "Resource must not be null");
+        Verify.notNull(resource, "Resource must not be null");
         this.resource = resource;
         this.encoding = encoding;
         this.charset = charset;
@@ -162,8 +159,8 @@ public class EncodedResource implements InputStreamSource {
         }
         EncodedResource otherResource = (EncodedResource) other;
         return (this.resource.equals(otherResource.resource) &&
-                        ObjectUtils.equals(this.charset, otherResource.charset) &&
-                        ObjectUtils.equals(this.encoding, otherResource.encoding));
+                        this.charset.equals(otherResource.charset)
+                        && this.encoding.equals(otherResource.encoding));
     }
 
     @Override

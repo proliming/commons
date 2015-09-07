@@ -21,8 +21,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
-import org.apache.commons.lang.ObjectUtils;
-
 import com.google.common.base.Preconditions;
 import com.google.common.io.Files;
 import com.proliming.commons.utils.ClassUtils;
@@ -45,7 +43,7 @@ public class ClassPathResource extends AbstractFileResolvingResource {
 
     private ClassLoader classLoader;
 
-    private Class<?> clazz;
+    private Class<?> cls;
 
     /**
      * Create a new {@code ClassPathResource} for {@code ClassLoader} usage.
@@ -89,15 +87,15 @@ public class ClassPathResource extends AbstractFileResolvingResource {
      * The path can be relative to the given class, or absolute within
      * the classpath via a leading slash.
      *
-     * @param path  relative or absolute path within the class path
-     * @param clazz the class to load resources with
+     * @param path relative or absolute path within the class path
+     * @param cls  the class to load resources with
      *
      * @see java.lang.Class#getResourceAsStream
      */
-    public ClassPathResource(String path, Class<?> clazz) {
+    public ClassPathResource(String path, Class<?> cls) {
         Preconditions.checkNotNull(path, "Path must not be null");
         this.path = StringUtils.cleanPath(path);
-        this.clazz = clazz;
+        this.cls = cls;
     }
 
     /**
@@ -106,12 +104,12 @@ public class ClassPathResource extends AbstractFileResolvingResource {
      *
      * @param path        relative or absolute path within the classpath
      * @param classLoader the class loader to load the resource with, if any
-     * @param clazz       the class to load resources with, if any
+     * @param cls         the class to load resources with, if any
      */
-    protected ClassPathResource(String path, ClassLoader classLoader, Class<?> clazz) {
+    protected ClassPathResource(String path, ClassLoader classLoader, Class<?> cls) {
         this.path = StringUtils.cleanPath(path);
         this.classLoader = classLoader;
-        this.clazz = clazz;
+        this.cls = cls;
     }
 
     /**
@@ -125,7 +123,7 @@ public class ClassPathResource extends AbstractFileResolvingResource {
      * Return the ClassLoader that this resource will be obtained from.
      */
     public final ClassLoader getClassLoader() {
-        return (this.clazz != null ? this.clazz.getClassLoader() : this.classLoader);
+        return (this.cls != null ? this.cls.getClassLoader() : this.classLoader);
     }
 
     /**
@@ -145,8 +143,8 @@ public class ClassPathResource extends AbstractFileResolvingResource {
      * @return the resolved URL, or {@code null} if not resolvable
      */
     protected URL resolveURL() {
-        if (this.clazz != null) {
-            return this.clazz.getResource(this.path);
+        if (this.cls != null) {
+            return this.cls.getResource(this.path);
         } else if (this.classLoader != null) {
             return this.classLoader.getResource(this.path);
         } else {
@@ -163,8 +161,8 @@ public class ClassPathResource extends AbstractFileResolvingResource {
     @Override
     public InputStream getInputStream() throws IOException {
         InputStream is;
-        if (this.clazz != null) {
-            is = this.clazz.getResourceAsStream(this.path);
+        if (this.cls != null) {
+            is = this.cls.getResourceAsStream(this.path);
         } else if (this.classLoader != null) {
             is = this.classLoader.getResourceAsStream(this.path);
         } else {
@@ -201,7 +199,7 @@ public class ClassPathResource extends AbstractFileResolvingResource {
     @Override
     public Resource createRelative(String relativePath) {
         String pathToUse = StringUtils.applyRelativePath(this.path, relativePath);
-        return new ClassPathResource(pathToUse, this.classLoader, this.clazz);
+        return new ClassPathResource(pathToUse, this.classLoader, this.cls);
     }
 
     /**
@@ -220,8 +218,8 @@ public class ClassPathResource extends AbstractFileResolvingResource {
     public String getDescription() {
         StringBuilder builder = new StringBuilder("class path resource [");
         String pathToUse = path;
-        if (this.clazz != null && !pathToUse.startsWith("/")) {
-            builder.append(ClassUtils.classPackageAsResourcePath(this.clazz));
+        if (this.cls != null && !pathToUse.startsWith("/")) {
+            builder.append(ClassUtils.classPackageAsResourcePath(this.cls));
             builder.append('/');
         }
         if (pathToUse.startsWith("/")) {
@@ -243,9 +241,9 @@ public class ClassPathResource extends AbstractFileResolvingResource {
         if (obj instanceof ClassPathResource) {
             ClassPathResource otherRes = (ClassPathResource) obj;
             return (this.path.equals(otherRes.path) &&
-                            ObjectUtils.equals(this.classLoader, otherRes.classLoader)
-                            &&
-                            ObjectUtils.equals(this.clazz, otherRes.clazz));
+                            this.classLoader.equals(otherRes.classLoader) &&
+                            this.cls.equals(otherRes.cls)
+            );
         }
         return false;
     }

@@ -27,6 +27,7 @@ import java.net.URL;
 
 import com.google.common.base.Preconditions;
 import com.proliming.commons.utils.StringUtils;
+import com.proliming.commons.utils.Verify;
 
 /**
  * {@link Resource} implementation for {@code java.io.File} handles.
@@ -52,7 +53,7 @@ public class FileSystemResource extends AbstractResource implements WritableReso
      * @param file a File handle
      */
     public FileSystemResource(File file) {
-        Preconditions.checkNotNull(file, "File must not be null");
+        Verify.notNull(file, "File must not be null");
         this.file = file;
         this.path = StringUtils.cleanPath(file.getPath());
     }
@@ -69,7 +70,7 @@ public class FileSystemResource extends AbstractResource implements WritableReso
      * @param path a file path
      */
     public FileSystemResource(String path) {
-        Preconditions.checkNotNull(path, "Path must not be null");
+        Verify.notNull(path, "Path must not be null");
         this.file = new File(path);
         this.path = StringUtils.cleanPath(path);
     }

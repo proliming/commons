@@ -26,14 +26,10 @@ package com.proliming.commons.io;
  * (This is consistent with the semantics in a Servlet container.)
  * <b>Use an explicit "file:" prefix to enforce an absolute file path.</b>
  * <p/>
- * <p>{@link org.springframework.context.support.FileSystemXmlApplicationContext}
  * is a full-fledged ApplicationContext implementation that provides
  * the same resource path resolution strategy.
  *
- * @author Juergen Hoeller
  * @see DefaultResourceLoader
- * @see org.springframework.context.support.FileSystemXmlApplicationContext
- * @since 1.1.3
  */
 public class FileSystemResourceLoader extends DefaultResourceLoader {
 
@@ -47,7 +43,6 @@ public class FileSystemResourceLoader extends DefaultResourceLoader {
      * @return the corresponding Resource handle
      *
      * @see FileSystemResource
-     * @see org.springframework.web.context.support.ServletContextResourceLoader#getResourceByPath
      */
     @Override
     protected Resource getResourceByPath(String path) {

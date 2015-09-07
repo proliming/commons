@@ -24,8 +24,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-import com.google.common.base.Preconditions;
 import com.proliming.commons.utils.ResourceUtils;
+import com.proliming.commons.utils.Verify;
 
 /**
  * Convenience base class for {@link Resource} implementations,
@@ -116,7 +116,7 @@ public abstract class AbstractResource implements Resource {
     @Override
     public long contentLength() throws IOException {
         InputStream is = this.getInputStream();
-        Preconditions.checkNotNull(is, "resource input stream must not be null");
+        Verify.notNull(is, "resource input stream must not be null");
         try {
             long size = 0;
             byte[] buf = new byte[255];

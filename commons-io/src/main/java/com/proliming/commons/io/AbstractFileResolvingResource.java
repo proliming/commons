@@ -30,7 +30,7 @@ import com.proliming.commons.utils.ResourceUtils;
  * Abstract base class for resources which resolve URLs into File references,
  * such as {@link UrlResource} or {@link ClassPathResource}.
  * <p/>
- * <p>Detects the "file" protocol as well as the JBoss "vfs" protocol in URLs,
+ * <p>Detects the "file" protocol in URLs,
  * resolving file system references accordingly.
  */
 public abstract class AbstractFileResolvingResource extends AbstractResource {
@@ -41,11 +41,7 @@ public abstract class AbstractFileResolvingResource extends AbstractResource {
      */
     @Override
     public File getFile() throws IOException {
-        URL url = getURL();
-        if (url.getProtocol().startsWith(ResourceUtils.URL_PROTOCOL_VFS)) {
-            return VfsResourceDelegate.getResource(url).getFile();
-        }
-        return ResourceUtils.getFile(url, getDescription());
+        return ResourceUtils.getFile(getURL(), getDescription());
     }
 
     /**
@@ -57,9 +53,6 @@ public abstract class AbstractFileResolvingResource extends AbstractResource {
         URL url = getURL();
         if (ResourceUtils.isJarURL(url)) {
             URL actualUrl = ResourceUtils.extractJarFileURL(url);
-            if (actualUrl.getProtocol().startsWith(ResourceUtils.URL_PROTOCOL_VFS)) {
-                return VfsResourceDelegate.getResource(actualUrl).getFile();
-            }
             return ResourceUtils.getFile(actualUrl, "Jar URL");
         } else {
             return getFile();
@@ -73,9 +66,6 @@ public abstract class AbstractFileResolvingResource extends AbstractResource {
      * @see ResourceUtils#getFile(java.net.URI, String)
      */
     protected File getFile(URI uri) throws IOException {
-        if (uri.getScheme().startsWith(ResourceUtils.URL_PROTOCOL_VFS)) {
-            return VfsResourceDelegate.getResource(uri).getFile();
-        }
         return ResourceUtils.getFile(uri, getDescription());
     }
 
@@ -192,20 +182,6 @@ public abstract class AbstractFileResolvingResource extends AbstractResource {
      */
     protected void customizeConnection(HttpURLConnection con) throws IOException {
         con.setRequestMethod("HEAD");
-    }
-
-    /**
-     * Inner delegate class, avoiding a hard JBoss VFS API dependency at runtime.
-     */
-    private static class VfsResourceDelegate {
-
-        public static Resource getResource(URL url) throws IOException {
-            return new VfsResource(VfsUtils.getRoot(url));
-        }
-
-        public static Resource getResource(URI uri) throws IOException {
-            return new VfsResource(VfsUtils.getRoot(uri));
-        }
     }
 
 }

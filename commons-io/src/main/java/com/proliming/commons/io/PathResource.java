@@ -28,7 +28,7 @@ import java.nio.file.OpenOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import com.google.common.base.Preconditions;
+import com.proliming.commons.utils.Verify;
 
 /**
  * {@link Resource} implementation for {@code java.nio.file.Path} handles.
@@ -51,7 +51,7 @@ public class PathResource extends AbstractResource implements WritableResource {
      * @param path a Path handle
      */
     public PathResource(Path path) {
-        Preconditions.checkNotNull(path, "Path must not be null");
+        Verify.notNull(path, "Path must not be null");
         this.path = path.normalize();
     }
 
@@ -67,7 +67,7 @@ public class PathResource extends AbstractResource implements WritableResource {
      * @see java.nio.file.Paths#get(String, String...)
      */
     public PathResource(String path) {
-        Preconditions.checkNotNull(path, "Path must not be null");
+        Verify.notNull(path, "Path must not be null");
         this.path = Paths.get(path).normalize();
     }
 
@@ -83,7 +83,7 @@ public class PathResource extends AbstractResource implements WritableResource {
      * @see java.nio.file.Paths#get(URI)
      */
     public PathResource(URI uri) {
-        Preconditions.checkNotNull(uri, "URI must not be null");
+        Verify.notNull(uri, "URI must not be null");
         this.path = Paths.get(uri).normalize();
     }
 
