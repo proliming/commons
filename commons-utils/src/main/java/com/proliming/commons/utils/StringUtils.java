@@ -37,15 +37,21 @@ import org.apache.commons.lang3.ObjectUtils;
  */
 public class StringUtils extends org.apache.commons.lang3.StringUtils {
 
-    private static final String FOLDER_SEPARATOR = "/";
+    public static final String FOLDER_SEPARATOR = "/";
 
-    private static final String WINDOWS_FOLDER_SEPARATOR = "\\";
+    public static final String WINDOWS_FOLDER_SEPARATOR = "\\";
 
-    private static final String TOP_PATH = "..";
+    public static final String TOP_PATH = "..";
 
-    private static final String CURRENT_PATH = ".";
+    public static final String CURRENT_PATH = ".";
 
-    private static final char EXTENSION_SEPARATOR = '.';
+    public static final char EXTENSION_SEPARATOR = '.';
+
+    public static final String EMPTY = "";
+
+    public static final String COMMA = ",";
+
+    public static final String NULL = "null";
 
     /**
      * Check that the given {@code CharSequence} is neither {@code null} nor
