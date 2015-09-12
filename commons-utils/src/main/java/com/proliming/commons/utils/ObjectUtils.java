@@ -100,7 +100,7 @@ public final class ObjectUtils {
     /**
      * Determine if the given objects are equal, returning {@code true}
      * if both are {@code null} or {@code false} if only one is
-     * {@code null}. This method is null-safe.
+     * {@code null}. This method is Null-safe.
      * <p>Compares arrays with {@code Arrays.equals}, performing an equality
      * check based on the array elements rather than the array reference.
      *
