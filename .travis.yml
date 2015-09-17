@@ -1,6 +1,6 @@
 language: java
-sudo: false
+sudo: required
 jdk:
   -oraclejdk7
 script:
-  -jdk_switcher user oraclejdk7
+  -jdk_switcher use oraclejdk7
