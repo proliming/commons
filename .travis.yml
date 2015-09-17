@@ -1,6 +1,0 @@
-language: java
-sudo: required
-jdk:
-  -oraclejdk7
-script:
-  -jdk_switcher use oraclejdk7
