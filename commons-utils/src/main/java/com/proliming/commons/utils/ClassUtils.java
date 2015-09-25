@@ -13,6 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/*
+ * Copyright (c) the original author or authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * You may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.proliming.commons.utils;
 
 import java.beans.Introspector;
@@ -448,7 +464,7 @@ public final class ClassUtils {
      *
      * @return the short name rendered in a standard JavaBeans property format
      *
-     * @see java.beans.Introspector#decapitalize(String)
+     * @see Introspector#decapitalize(String)
      */
     public static String getShortNameAsProperty(Class<?> cls) {
         String shortName = ClassUtils.getShortName(cls);
@@ -1377,7 +1393,7 @@ public final class ClassUtils {
      *
      * @return the merged interface as Class
      *
-     * @see java.lang.reflect.Proxy#getProxyClass
+     * @see Proxy#getProxyClass
      */
     public static Class<?> createCompositeInterface(Class<?>[] interfaces, ClassLoader classLoader) {
         Verify.verify(ArrayUtils.isNotEmpty(interfaces), "Interfaces must not be empty");

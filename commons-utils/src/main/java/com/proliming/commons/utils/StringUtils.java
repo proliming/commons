@@ -13,6 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/*
+ * Copyright (c) the original author or authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * You may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.proliming.commons.utils;
 
 import java.util.ArrayList;
@@ -3443,7 +3459,7 @@ public class StringUtils {
      *
      * @return the trimmed {@code String}
      *
-     * @see java.lang.Character#isWhitespace
+     * @see Character#isWhitespace
      */
     public static String trimWhitespace(String str) {
         if (!hasLength(str)) {
@@ -3467,7 +3483,7 @@ public class StringUtils {
      *
      * @return the trimmed {@code String}
      *
-     * @see java.lang.Character#isWhitespace
+     * @see Character#isWhitespace
      */
     public static String trimAllWhitespace(String str) {
         if (!hasLength(str)) {
@@ -3491,7 +3507,7 @@ public class StringUtils {
      *
      * @return the trimmed {@code String}
      *
-     * @see java.lang.Character#isWhitespace
+     * @see Character#isWhitespace
      */
     public static String trimLeadingWhitespace(String str) {
         if (!hasLength(str)) {
@@ -3511,7 +3527,7 @@ public class StringUtils {
      *
      * @return the trimmed {@code String}
      *
-     * @see java.lang.Character#isWhitespace
+     * @see Character#isWhitespace
      */
     public static String trimTrailingWhitespace(String str) {
         if (!hasLength(str)) {
@@ -4001,7 +4017,7 @@ public class StringUtils {
      *
      * @return an array of the tokens
      *
-     * @see java.util.StringTokenizer
+     * @see StringTokenizer
      * @see String#trim()
      * @see #delimitedListToStringArray
      */
@@ -4028,7 +4044,7 @@ public class StringUtils {
      * @return an array of the tokens ({@code null} if the input {@code String}
      * was {@code null})
      *
-     * @see java.util.StringTokenizer
+     * @see StringTokenizer
      * @see String#trim()
      * @see #delimitedListToStringArray
      */

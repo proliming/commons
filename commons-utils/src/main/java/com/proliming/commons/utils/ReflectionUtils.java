@@ -1,4 +1,20 @@
 /*
+ * Copyright (c) the original author or authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * You may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*
  * Copyright 2002-2015 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -195,7 +211,7 @@ public class ReflectionUtils {
      *
      * @return the invocation result, if any
      *
-     * @see #invokeMethod(java.lang.reflect.Method, Object, Object[])
+     * @see #invokeMethod(Method, Object, Object[])
      */
     public static Object invokeMethod(Method method, Object target) {
         return invokeMethod(method, target, new Object[0]);
@@ -232,7 +248,7 @@ public class ReflectionUtils {
      * @return the invocation result, if any
      *
      * @throws SQLException the JDBC API SQLException to rethrow (if any)
-     * @see #invokeJdbcMethod(java.lang.reflect.Method, Object, Object[])
+     * @see #invokeJdbcMethod(Method, Object, Object[])
      */
     public static Object invokeJdbcMethod(Method method, Object target) throws SQLException {
         return invokeJdbcMethod(method, target, new Object[0]);
@@ -249,7 +265,7 @@ public class ReflectionUtils {
      * @return the invocation result, if any
      *
      * @throws SQLException the JDBC API SQLException to rethrow (if any)
-     * @see #invokeMethod(java.lang.reflect.Method, Object, Object[])
+     * @see #invokeMethod(Method, Object, Object[])
      */
     public static Object invokeJdbcMethod(Method method, Object target, Object... args) throws SQLException {
         try {
@@ -383,7 +399,7 @@ public class ReflectionUtils {
     /**
      * Determine whether the given method is an "equals" method.
      *
-     * @see java.lang.Object#equals(Object)
+     * @see Object#equals(Object)
      */
     public static boolean isEqualsMethod(Method method) {
         if (method == null || !method.getName().equals("equals")) {
@@ -396,7 +412,7 @@ public class ReflectionUtils {
     /**
      * Determine whether the given method is a "hashCode" method.
      *
-     * @see java.lang.Object#hashCode()
+     * @see Object#hashCode()
      */
     public static boolean isHashCodeMethod(Method method) {
         return (method != null && method.getName().equals("hashCode") && method.getParameterTypes().length == 0);
@@ -405,14 +421,14 @@ public class ReflectionUtils {
     /**
      * Determine whether the given method is a "toString" method.
      *
-     * @see java.lang.Object#toString()
+     * @see Object#toString()
      */
     public static boolean isToStringMethod(Method method) {
         return (method != null && method.getName().equals("toString") && method.getParameterTypes().length == 0);
     }
 
     /**
-     * Determine whether the given method is originally declared by {@link java.lang.Object}.
+     * Determine whether the given method is originally declared by {@link Object}.
      */
     public static boolean isObjectMethod(Method method) {
         if (method == null) {
@@ -434,7 +450,7 @@ public class ReflectionUtils {
      *
      * @param field the field to make accessible
      *
-     * @see java.lang.reflect.Field#setAccessible
+     * @see Field#setAccessible
      */
     public static void makeAccessible(Field field) {
         if ((!Modifier.isPublic(field.getModifiers()) ||
@@ -452,7 +468,7 @@ public class ReflectionUtils {
      *
      * @param method the method to make accessible
      *
-     * @see java.lang.reflect.Method#setAccessible
+     * @see Method#setAccessible
      */
     public static void makeAccessible(Method method) {
         if ((!Modifier.isPublic(method.getModifiers()) ||
@@ -469,7 +485,7 @@ public class ReflectionUtils {
      *
      * @param ctor the constructor to make accessible
      *
-     * @see java.lang.reflect.Constructor#setAccessible
+     * @see Constructor#setAccessible
      */
     public static void makeAccessible(Constructor<?> ctor) {
         if ((!Modifier.isPublic(ctor.getModifiers()) ||

@@ -104,18 +104,8 @@ public abstract class Pair<L, R> implements Map.Entry<L, R>, Comparable<Pair<L, 
         return getRight();
     }
 
-    /**
-     * <p>Compares the pair based on the left element followed by the right element.
-     * The types must be {@code Comparable}.</p>
-     *
-     * @param other the other pair, not null
-     *
-     * @return negative if this is less, zero if equal, positive if greater
-     */
-    @Override
-    public int compareTo(final Pair<L, R> other) {
-        return new CompareToBuilder().append(getLeft(), other.getLeft())
-                .append(getRight(), other.getRight()).toComparison();
+    public int compareTo(Pair<L, R> other) {
+
     }
 
     /**

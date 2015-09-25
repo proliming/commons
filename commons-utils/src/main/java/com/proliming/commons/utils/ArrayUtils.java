@@ -13,6 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/*
+ * Copyright (c) the original author or authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * You may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.proliming.commons.utils;
 
 import java.lang.reflect.Array;
@@ -201,8 +217,8 @@ public class ArrayUtils {
     //-----------------------------------------------------------------------
 
     /**
-     * <p>Converts the given array into a {@link java.util.Map}. Each element of the array
-     * must be either a {@link java.util.Map.Entry} or an Array, containing at least two
+     * <p>Converts the given array into a {@link Map}. Each element of the array
+     * must be either a {@link Map.Entry} or an Array, containing at least two
      * elements, where the first element is used as key and the second as
      * value.</p>
      * <p/>
@@ -217,7 +233,7 @@ public class ArrayUtils {
      * <p/>
      * <p>This method returns {@code null} for a {@code null} input array.</p>
      *
-     * @param array an array whose elements are either a {@link java.util.Map.Entry} or
+     * @param array an array whose elements are either a {@link Map.Entry} or
      *              an Array containing at least two elements, may be {@code null}
      *
      * @return a {@code Map} that was created from the array
@@ -225,7 +241,7 @@ public class ArrayUtils {
      * @throws IllegalArgumentException if one element of this Array is
      *                                  itself an Array containing less then two elements
      * @throws IllegalArgumentException if the array contains elements other
-     *                                  than {@link java.util.Map.Entry} and an Array
+     *                                  than {@link Map.Entry} and an Array
      */
     public static Map<Object, Object> toMap(final Object[] array) {
         if (array == null) {
