@@ -19,9 +19,7 @@
         <module>commons-cache</module>
         <module>commons-lang</module>
         <module>commons-concurrent</module>
-        <module>continvery</module>
     </modules>
-
 
     <dependencies>
         <dependency>
